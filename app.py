@@ -1,3 +1,4 @@
+import os
 import logging
 from flask import Flask, jsonify, abort
 from flask import request
@@ -5,7 +6,8 @@ from bot import Bot
 from tg_controlers import ServiceNotiter
 
 app = Flask(__name__)
-bot = Bot('966337942:AAE0FiNCyhcR-nNMdGBn1bBqg0rGCw72t48')
+TG_NOTIFITER_TOKEN = os.getenv('TG_NOTIFITER_TOKEN')
+bot = Bot(TG_NOTIFITER_TOKEN)
 service = ServiceNotiter(bot)
 
 # Enable logging
