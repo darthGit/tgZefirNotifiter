@@ -3,12 +3,12 @@ import logging
 from flask import Flask, jsonify, abort
 from flask import request
 from bot import Bot
-from tg_controlers import ServiceNotiter
+from tg_controlers import ServiceNotifiter
 
 app = Flask(__name__)
 TG_NOTIFITER_TOKEN = os.getenv('TG_NOTIFITER_TOKEN')
 bot = Bot(TG_NOTIFITER_TOKEN)
-service = ServiceNotiter(bot)
+service = ServiceNotifiter(bot)
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
