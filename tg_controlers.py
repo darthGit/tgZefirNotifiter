@@ -28,7 +28,7 @@ class ServiceNotiter():
             *Message:* {request['message']}
             *From:* {request['from']}
             *Phone:* {request['phone']}
-            *From:* {request['from']}
+            *Email:* {request['email']}
             """
 
         self._bot.send_msg_to_chat(chat_id=self._main_user, msg=msg, accept=accept)
