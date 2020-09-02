@@ -5,10 +5,6 @@ from flask import request
 from bot import Bot
 from tg_controlers import ServiceNotifiter
 
-app = Flask(__name__)
-TG_NOTIFITER_TOKEN = os.getenv('TG_NOTIFITER_TOKEN')
-bot = Bot(TG_NOTIFITER_TOKEN)
-service = ServiceNotifiter(bot)
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -16,9 +12,18 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+app = Flask(__name__)
+
+logger.info('Configure Bot.....')
+TG_NOTIFITER_TOKEN = os.getenv('TG_NOTIFITER_TOKEN')
+bot = Bot(TG_NOTIFITER_TOKEN)
+service = ServiceNotifiter(bot=bot, main_user='390499498')
+bot.run_bot()
+
 @app.route('/')
-def hello():
-    return 'ok', 200
+def test_service():
+    logger.info('in /')
+    return 'Service started....', 200
 
 @app.route('/shop/notification/api/v0.1/task', methods=['POST'])
 def create_task():
@@ -38,13 +43,11 @@ def create_task():
     return jsonify(response), 201
 
 def main():
-    bot.run_bot()
     app.run(host='0.0.0.0', port=80)
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
+    
+    # Run the app until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
-    #updater.idle()
-
 
 if __name__ == '__main__':
    main()
+

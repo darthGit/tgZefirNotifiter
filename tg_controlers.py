@@ -10,9 +10,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 class ServiceNotifiter():
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Bot, main_user: str):
         self._bot = bot
-        self._main_user = ''
+        self._main_user = main_user
         self._bot.add_entry_point('start', self._start)
 
     def send_msg(self, request):
