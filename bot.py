@@ -19,6 +19,7 @@ class Bot:
         self._dispatcher.add_handler(CommandHandler(entry_point, function))
 
     def run_bot(self):
+        # start_polling() is non-blocking and will stop the bot gracefully.
         self._updater.start_polling()
 
     def send_msg_to_chat(self, chat_id: str, msg: str, accept: bool ):
